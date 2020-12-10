@@ -85,7 +85,7 @@ describe('app endpoints are correct', () => {
     expect(res.body).toEqual(expect.arrayContaining(book));
     expect(res.body).toHaveLength(book.length);
   });
-  
+
   it('finds all author via GET', async() => {
     const author = await Promise.all([
       {
@@ -103,4 +103,30 @@ describe('app endpoints are correct', () => {
     expect(res.body).toEqual(expect.arrayContaining(author));
     expect(res.body).toHaveLength(author.length);
   });
+  //////////////////updates books and authors
+  it('updates a books via PUT', async() => {
+    const book = await Books.insert({
+      author: 'barry',
+      title: 'jerry'
+    });
+
+    const res = await request(app)
+      .put(`/api/v1/books/${book.id}`)
+      .send({
+        author: 'ben',
+        title: 'jerry'
+      });
+
+    expect(res.body).toEqual({
+      id: '1',
+      author: 'ben',
+      title: 'jerry'
+    });
+  });
+
+
+
+
+
+
 });
