@@ -67,5 +67,22 @@ describe('app endpoints are correct', () => {
 
     expect(response.body).toEqual(author);
   });
+  ///////////////get all authors and books
+  it('finds all books via GET', async() => {
+    const book = await Promise.all([
+      {
+        author: 'ben',
+        title: 'jerry'
+      },
+      {
+        author: 'ben',
+        title: 'jerry'
+      },
+    ].map(book => Books.insert(book)));
+    const res = await request(app)
+      .get('/api/v1/books');
 
+    expect(res.body).toEqual(expect.arrayContaining(book));
+    expect(res.body).toHaveLength(book.length);
+  });
 });
