@@ -143,19 +143,29 @@ describe('app endpoints are correct', () => {
     });
   });
 
-  ///////////////////////////////////////////
-  //   it('deletes a flower via DELETE', async() => {
-  // //     const flower = await Flower.insert({
-  // //       temperature: 'hot',
-  // //       weather: 'sunny',
-  // //       water: 'water twice a week'
-  // //     });
+  ///////////////////////////////////////////delete
+  it('deletes a book via DELETE', async() => {
+    const books = await Books.insert({
+      author: 'ben',
+      title: 'jerry'
+    });
 
-  // //     const res = await request(app)
-  // //       .delete(`/api/v1/flower/${flower.id}`);
+    const res = await request(app)
+      .delete(`/api/v1/books/${books.id}`);
 
-  // //     expect(res.body).toEqual(flower);
-  // //   });
+    expect(res.body).toEqual(books);
+  });
+  it('deletes a author via DELETE', async() => {
+    const author = await Author.insert({
+      bio: 'ben',
+      author_id: 'jerry'
+    });
+
+    const res = await request(app)
+      .delete(`/api/v1/authors/${author.id}`);
+
+    expect(res.body).toEqual(author);
+  });
 
 
 
