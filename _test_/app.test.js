@@ -16,10 +16,10 @@ describe('app endpoints are correct', () => {
   afterAll(() => {
     return pool.end();
   });
-
-  it('creates a new via POST', async() => {
+  ////////book post test
+  it('creates a new book via POST', async() => {
     const res = await request(app)
-      .post('/api/v1/author')
+      .post('/api/v1/books')
       .send({
         author: 'ben',
         title: 'jerry'
@@ -29,5 +29,17 @@ describe('app endpoints are correct', () => {
     expect(res.body).toEqual({ id: '1',  author: 'ben',
       title: 'jerry' });
   });
+  /////////////////////author post test
+  it('creates a new author via POST', async() => {
+    const res = await request(app)
+      .post('/api/v1/authors')
+      .send({
+        bio: 'ben',
+        author_id: 'jerry'
 
+      });
+
+    expect(res.body).toEqual({ id: '1',  bio: 'ben',
+      author_id: 'jerry' });
+  });
 });

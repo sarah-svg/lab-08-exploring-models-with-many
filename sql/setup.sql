@@ -13,6 +13,7 @@ CREATE TABLE books (
 --      bio TEXT NOT NULL,
 --      author_id  BIGINT REFERENCES flowers(id)
 -- );
+
 CREATE TABLE authors (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     bio TEXT NOT NULL,
