@@ -3,6 +3,7 @@ const fs = require('fs');
 const request = require('supertest');
 
 const app = require('../lib/app');
+const Author = require('../lib/models/author');
 const Books = require('../lib/models/whatever');
 const pool = require('../lib/utils/pool');
 
@@ -57,6 +58,14 @@ describe('app endpoints are correct', () => {
     expect(response.body).toEqual(book);
   });
 
+  it('finds a author by id via GET', async() => {
+    const author = await Author.insert({      bio: 'ben',
+      author_id: 'jerry' });
 
+    const response = await request(app)
+      .get(`/api/v1/authors/${author.id}`);
+
+    expect(response.body).toEqual(author);
+  });
 
 });
