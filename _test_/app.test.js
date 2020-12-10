@@ -123,8 +123,39 @@ describe('app endpoints are correct', () => {
       title: 'jerry'
     });
   });
+  it('updates a author via PUT', async() => {
+    const author = await Author.insert({
+      bio: 'ben',
+      author_id: 'jerry j'
+    });
 
+    const res = await request(app)
+      .put(`/api/v1/authors/${author.id}`)
+      .send({
+        bio: 'ben',
+        author_id: 'jerry'
+      });
 
+    expect(res.body).toEqual({
+      id: '1',
+      bio: 'ben',
+      author_id: 'jerry'
+    });
+  });
+
+  ///////////////////////////////////////////
+  //   it('deletes a flower via DELETE', async() => {
+  // //     const flower = await Flower.insert({
+  // //       temperature: 'hot',
+  // //       weather: 'sunny',
+  // //       water: 'water twice a week'
+  // //     });
+
+  // //     const res = await request(app)
+  // //       .delete(`/api/v1/flower/${flower.id}`);
+
+  // //     expect(res.body).toEqual(flower);
+  // //   });
 
 
 
