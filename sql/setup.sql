@@ -1,0 +1,23 @@
+
+DROP TABLE IF EXISTS books CASCADE;
+DROP TABLE IF EXISTS authors CASCADE;
+DROP TABLE IF EXISTS books_authors;
+
+
+CREATE TABLE books (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  genre TEXT NOT NULL,
+  biography TEXT NOT NULL
+);
+
+CREATE TABLE authors (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL, 
+  address TEXT  
+);
+
+CREATE TABLE books_authors (
+  book_id BIGINT REFERENCES books(id),
+  authors_id BIGINT REFERENCES authors(id),
+  PRIMARY KEY(book_id, authors_id)
+);
